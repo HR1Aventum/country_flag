@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Countries</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rgb(12, 10, 10);
+            padding: 20px;
+        }
+        
+        img {
+            height: 300px;
+            width: 500px;
+            object-fit: cover;
+        }
+        
+        .in_div {
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid white;
+        }
+        
+        div {
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var myObj, x;
+        const cont = document.createElement("div")
+        cont.className = "row"
+        document.body.appendChild(cont)
+        const Flag_url = "https://restcountries.eu/rest/v2/all"
+        async function Getflag() {
+            const response = await fetch(Flag_url);
+            const data = await response.json();
+            data.forEach(element => {
+                var container = document.createElement("div");
+                var cont2 = document.createElement("div");
+                var cont1 = document.createElement("div");
+                var flag_image = document.createElement("img");
+
+                var details = document.createElement("p")
+                container.classList.add("in_div")
+
+                details.setAttribute("id", data.indexOf(element))
+                flag_image.src = element.flag;
+
+
+                container.className = "card"
+                container.style = "width:500px;height: 400px; color:white; background-color:rgb(12, 10, 10); "
+                flag_image.className = "card-img-top"
+                    //                flag_image.setAttribute("alt", "...")
+                details.className = "card-text"
+
+
+
+
+
+
+                //for appending the data
+                container.appendChild(cont1)
+                cont1.appendChild(flag_image)
+                container.appendChild(cont2)
+                cont2.appendChild(details)
+                cont.appendChild(container)
+
+
+            });
+            // console.log(data)
+            for (x of Object.keys(data)) {
+                document.getElementById(x).innerHTML += data[x].name + "<br>" + data[x].capital + "<br>" + data[x].population;
+            }
+
+        }
+
+
+        Getflag();
+    </script>
+</body>
+
+</html>
